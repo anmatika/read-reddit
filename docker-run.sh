@@ -1,1 +1,1 @@
-docker run -d -p 4444:4444 --rm node-babel-starter
+docker run -d -p 3000:3000 --rm node-babel-starter
