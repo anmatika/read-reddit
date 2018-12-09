@@ -1,12 +1,13 @@
+
 # node-babel-starter
 
 ## Prequisities
 
 * Install the latest node
 * Install dependencies
+   
+   ```yarn install```
 
-    yarn install
-
-* Run 
+## Run
 
     yarn start
