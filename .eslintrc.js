@@ -7,6 +7,8 @@ module.exports = {
   },
   globals: {
     expect: true,
+    window: true,
+    document: true,
   },
   settings: {
     'import/resolver': {
@@ -19,5 +21,6 @@ module.exports = {
   extends: ['strongloop'],
   rules: {
     indent: ['error', 2, { SwitchCase: 1 }],
+    'no-await-in-loop': ['off']
   },
 };
