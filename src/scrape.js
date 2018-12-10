@@ -7,10 +7,9 @@ const puppeteer = require('puppeteer');
   await page.screenshot({ path: 'example.png' });
   // await page.pdf({ path: 'hn.pdf', format: 'A4' });
   // Wait for the results page to load and display the results.
-  const resultsSelector = '[id^=\'msg_\']';
+  const resultsSelector = '[id^=\'msg_\'] a';
   await page.waitForSelector(resultsSelector);
 
-  const resultsSelector = '';
 
   // Extract the results from the page.
   const links = await page.evaluate((resultsSelector) => {

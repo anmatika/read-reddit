@@ -10,8 +10,18 @@ const ScrapeInfinite = (opts) => {
   const { url, itemTargetCount = 5, headless = true } = opts;
 
   function extractItems() {
-    const extractedElements = document.querySelectorAll('.scrollerItem a h2');
-    return Array.from(extractedElements).map(e => e.innerText);
+    const extractedElements = document.querySelectorAll('.scrollerItem a[data-click-id=body]');
+    // const elems = Array.from(extractedElements).map(e => (
+    //   {
+    //     href: e.href,
+    //     // title: e.querySelector('h2').innerText,
+    //   }));
+    // return elems;
+    console.log('extractedelems', extractedElements);
+    // const elems = [];
+
+    return Array.from(extractedElements).map(e => ({ href: e.href, t: e.innerText }));
+    // return elems;
   }
 
   async function scrapeInfiniteScrollItems(
