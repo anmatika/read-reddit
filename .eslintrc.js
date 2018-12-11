@@ -21,6 +21,7 @@ module.exports = {
   extends: ['strongloop'],
   rules: {
     indent: ['error', 2, { SwitchCase: 1 }],
-    'no-await-in-loop': ['off']
+    'no-await-in-loop': ['off'],
+    'no-restricted-syntax': ['off']
   },
 };
