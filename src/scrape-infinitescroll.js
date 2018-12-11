@@ -12,7 +12,7 @@ const ScrapeInfinite = (opts) => {
   function extractItems() {
     const extractedElements = document.querySelectorAll('.scrollerItem a[data-click-id=body]');
 
-    return Array.from(extractedElements).map(e => ({ href: e.href, title: e.innerText }));
+    return Array.from(extractedElements).map(e => ({ url: e.href, title: e.innerText }));
   }
 
   function extractComments() {
@@ -24,7 +24,12 @@ const ScrapeInfinite = (opts) => {
   async function scrapeComments(page, fnExtractComments) {
 
     const comments = await page.evaluate(fnExtractComments);
-    return comments;
+    return comments.map(c => (
+      {
+        ...c,
+        url: page.url(),
+      }
+    ));
   }
 
   async function scrapeInfiniteScrollItems(
@@ -60,18 +65,20 @@ const ScrapeInfinite = (opts) => {
     // Scroll and extract items from the page.
     const items = await scrapeInfiniteScrollItems(page, extractItems);
 
-    fs.writeFileSync('./items.txt', `${items.join('\n')}\n`);
+    fs.writeFileSync('./items.json', JSON.stringify(items));
     console.log('items', items);
     const allComments = [];
     for (const item of items) {
 
-      await page.goto(item.href);
+      await page.goto(item.url);
       const comments = await scrapeComments(page, extractComments);
       console.log('comments', comments);
 
       allComments.push(comments);
 
     }
+
+    fs.writeFileSync('./comments.json', JSON.stringify(allComments));
 
     // Close the browser.
     await browser.close();

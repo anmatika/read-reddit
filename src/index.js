@@ -1,3 +1,4 @@
-import ScrapeInfinite from './scrape-infinitescroll';
 
-ScrapeInfinite({ url: 'https://www.reddit.com/r/Bitcoin/' }).execute();
+import reddit from './reddit';
+
+// ScrapeInfinite({ url: 'https://www.reddit.com/r/Bitcoin/' }).execute();

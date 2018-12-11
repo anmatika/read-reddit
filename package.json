@@ -1,13 +1,17 @@
 {
-  "name": "scrape-puppe",
+  "name": "read-reddit",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
+    "body-parser": "^1.18.3",
     "chalk": "^2.4.1",
+    "cors": "^2.8.5",
     "dotenv": "^6.0.0",
+    "express": "^4.16.4",
     "fs": "^0.0.1-security",
+    "node-fetch": "^2.3.0",
     "puppeteer": "^1.11.0",
     "winston": "^3.1.0"
   },
@@ -26,11 +30,13 @@
     "eslint-loader": "^1.8.0",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-prettier": "^2.6.2",
+    "nodemon": "^1.18.8",
     "prettier-eslint": "^8.8.2"
   },
   "scripts": {
     "start:prod": "NODE_ENV=production node ./build/index",
     "start:dev": "NODE_ENV=development node ./build/index",
+    "start:server": "./node_modules/.bin/nodemon --exec babel-node ./src/runServer",
     "build": "node ./node_modules/@babel/cli/bin/babel -d ./build ./src -s",
     "clean": "rimraf ./build",
     "start": "babel-node ./src/index.js",

@@ -1,5 +1,5 @@
 
-# scrape-puppe
+# read-reddit
 
 ## Prequisities
 
