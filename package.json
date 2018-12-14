@@ -13,6 +13,8 @@
     "fs": "^0.0.1-security",
     "node-fetch": "^2.3.0",
     "puppeteer": "^1.11.0",
+    "snoostorm": "^0.0.5",
+    "snoowrap": "^1.15.2",
     "winston": "^3.1.0"
   },
   "devDependencies": {
