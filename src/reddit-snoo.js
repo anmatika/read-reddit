@@ -2,6 +2,7 @@ require('dotenv').config();
 import Snoowrap from 'snoowrap';
 import Snoostorm from 'snoostorm';
 import chalk from 'chalk';
+
 const options = {
   userAgent: 'reddit-bot-example-node',
   clientId: process.env.CLIENT_ID,
@@ -37,9 +38,7 @@ comments.on('comment', c => {
   console.log(chalk.blue('Comment from stream'), comment);
   const user = r.getUser(comment.author);
   console.log(chalk.green('User'), user);
-  // user.getOverview().then(o => {
-  //   console.log(chalk.green('User.Overview', JSON.stringify(o)));
-  // });
+
   user.getComments().then(c => {
     const comments = c.map(x => {
       return {
@@ -57,18 +56,3 @@ comments.on('comment', c => {
     console.log(chalk.green(`User ${comment.author} comments`), comments);
   });
 });
-
-// function x() {
-//   return new Promise(resolve => {
-//     setTimeout(c => {
-//       resolve('foo');
-//     }, 500);
-//   });
-// }
-
-// function main() {
-//   x().then(x => {
-//     return console.log(x);
-//   });
-// }
-// main();
