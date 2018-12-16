@@ -1,3 +1,4 @@
-import reddit from './reddit-snoo';
+import './db';
+import './reddit-snoo';
 
-// ScrapeInfinite({ url: 'https://www.reddit.com/r/Bitcoin/' }).execute();
+
