@@ -1,1 +1,1 @@
-docker run -d -p 3000:3000 --rm read-reddit
+docker run -d -p 4444:4444 --rm read-reddit

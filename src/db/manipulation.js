@@ -3,6 +3,8 @@ import {
   getUserByName,
 } from './queries';
 import { log } from '../utils/logger';
+import Comment from './models/Comment';
+import User from './models/User';
 
 export async function addUser(username) {
   log('adding user', username);
@@ -29,9 +31,25 @@ export async function addUserIfNotExists(username) {
   return user;
 }
 
-export async function addCommentAndUser(comment, username) {
-  await DB.insertIntoCollection('comments', comment);
-  return addUserIfNotExists(username);
+function addComment(comment) {
+  return DB.insertIntoCollection('comments', comment);
+}
+
+function addCommentsOfUserEdge(commentId, userId) {
+  log(`insering into edges CommentsOfUser ${commentId} ${userId} `);
+  return DB.insertIntoEdges('CommentsOfUser', { _from: commentId, _to: userId });
+}
+
+export async function insertCommentAndUser(comment, username) {
+  const c = new Comment(comment);
+  const commentRes = await c.add();
+  console.log('comments insert', commentRes);
+  const u = new User(username);
+  const userRes = await u.addIfNotExists();
+  console.log('user res', userRes);
+  const edgeRes = await addCommentsOfUserEdge(commentRes._id, userRes._id);
+  console.log('edgeRes', edgeRes);
+  return userRes;
 
 }
 

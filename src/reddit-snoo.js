@@ -1,7 +1,8 @@
 import chalk from 'chalk';
 import moment from 'moment';
-import { addCommentAndUser } from './db/manipulation';
+import { insertCommentAndUser } from './db/manipulation';
 import Snoo from './Snoo';
+import { log } from './utils/logger';
 
 const snoo = new Snoo();
 // On comment, perform whatever logic you want to do
@@ -23,17 +24,20 @@ snoo.getCommentStream().on('comment', async(c) => {
   };
 
   console.log(chalk.blue('Comment from stream'), comment);
+  log(`Comment from stream ${comment}`);
 
   const commnst = await getUserComments(comment.author);
 
+  log(`User ${comment.author} comments ${commnst.length}`);
   console.log(chalk.green(`User ${comment.author} comments`), commnst.length);
-  addCommentAndUser(comment, comment.author);
+  insertCommentAndUser(comment, comment.author);
 });
 
 
 const getUserComments = (username) => {
   const user = snoo.getSnoowrap().getUser(username);
   console.log(chalk.green('User'), user);
+  log(`User ${user}`);
 
   return new Promise((resolve) => {
     user.getComments().then((c) => {

@@ -38,12 +38,12 @@
     "prettier-eslint": "^8.8.2"
   },
   "scripts": {
+    "start": "babel-node ./src/index.js",
     "start:prod": "NODE_ENV=production node ./build/index",
     "start:dev": "NODE_ENV=development node ./build/index",
     "start:server": "./node_modules/.bin/nodemon --exec babel-node ./src/runServer",
     "build": "node ./node_modules/@babel/cli/bin/babel -d ./build ./src -s",
     "clean": "rimraf ./build",
-    "start": "babel-node ./src/index.js",
     "debug": "babel-node ./src/index.js --inspect"
   }
 }
