@@ -1,7 +1,4 @@
-
-
 import DB from '../index';
-import { log } from '../../utils/logger';
 
 export default class BaseEdgeModel {
   constructor(collectionName, data) {
@@ -12,5 +9,9 @@ export default class BaseEdgeModel {
 
   add() {
     return DB.insertIntoEdges(this.collectionName, this.data);
+  }
+
+  truncate() {
+    return DB.truncateEdgeCollection(this.collectionName);
   }
 }

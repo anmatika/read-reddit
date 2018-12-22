@@ -9,4 +9,5 @@ export default class Comment extends BaseModel {
   add() {
     return super.add();
   }
+
 }

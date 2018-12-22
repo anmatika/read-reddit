@@ -12,4 +12,8 @@ export default class BaseModel {
     return DB.insertIntoCollection(this.collectionName, this.data);
   }
 
+  truncate() {
+    return DB.truncateCollection(this.collectionName);
+  }
+
 }
