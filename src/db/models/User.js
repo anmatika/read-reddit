@@ -5,27 +5,29 @@ import BaseModel from './BaseModel';
 import DB from '../index';
 import { log } from '../../utils/logger';
 
-
 export default class User extends BaseModel {
   constructor(username) {
-    super('users', username);
+    super('users', { username });
     this.username = username;
   }
-
 
   add() {
     return super.add();
   }
 
-  static addUser(username) {
-    log('adding user', username);
-    return DB.insertIntoCollection('users', { username });
+  async delete() {
+    const user = await User.getUserByName(this.username);
+
+    if (user !== undefined) {
+      log('deleting user', user);
+      return DB.removeFromCollection('users', user._id);
+    }
   }
 
   async addIfNotExists() {
     const user = await User.getUserByName(this.username);
     if (user === undefined) {
-      const newuser = await User.addUser(this.username);
+      const newuser = super.add();
 
       return newuser;
     }

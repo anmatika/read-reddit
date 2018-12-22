@@ -1,7 +1,9 @@
 
-import DB from '../index';
 
-export default class BaseModel {
+import DB from '../index';
+import { log } from '../../utils/logger';
+
+export default class BaseEdgeModel {
   constructor(collectionName, data) {
     this.collectionName = collectionName;
     this.data = data;
@@ -9,7 +11,6 @@ export default class BaseModel {
   }
 
   add() {
-    return DB.insertIntoCollection(this.collectionName, this.data);
+    return DB.insertIntoEdges(this.collectionName, this.data);
   }
-
 }

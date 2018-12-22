@@ -59,6 +59,8 @@ class DB {
 
   insertIntoEdges(name, data) {
     const collection = this.db.edgeCollection(name);
+
+    console.log('inserting into edgeCollection ', collection, data);
     return collection.save({ ...data, created: new Date() });
   }
 }
