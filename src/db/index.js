@@ -63,6 +63,10 @@ class DB {
     console.log('inserting into edgeCollection ', collection, data);
     return collection.save({ ...data, created: new Date() });
   }
+
+  getGraph(name) {
+    return this.db.graph(name);
+  }
 }
 const db = new DB();
 

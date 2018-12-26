@@ -45,4 +45,16 @@ export default class User extends BaseModel {
     log('users', name, users);
     return users.length > 0 ? users[0] : undefined;
   }
+
+  async getComments() {
+    const user = await User.getUserByName(this.username);
+    if (!user) return null;
+
+    const query = aql`
+      FOR v IN 1..2 INBOUND ${user._id} commentEdges
+      RETURN v
+    `;
+
+    return DB.query(query);
+  }
 }
